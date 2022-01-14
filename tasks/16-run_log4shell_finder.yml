@@ -1,0 +1,21 @@
+---
+
+- name: "Run log4shell-finder-{{ log4shell_finder_on_python.version }}"
+  shell: "{{ log4shell_finder_on_python.nice |d('/usr/bin/nice -n 0') }} \
+          {{ log4shell_finder_on_python_path_python |d('/usr/bin/python3') }} \
+          {{ log4shell_finder_on_python_dir_work }}/test_log4shell-{{ log4shell_finder_on_python.version }}.py \
+          {{ log4shell_finder_on_python_path_search |d('/') }} \
+          {{ log4shell_finder_on_python_argument |d() }} \
+          {{ log4shell_finder_on_python_arguments.exclude_dirs if log4shell_finder_on_python_exclude_dirs is defined }} \
+          {{ log4shell_finder_on_python_exclude_dirs if log4shell_finder_on_python_exclude_dirs is defined }} \
+          {{ log4shell_finder_on_python_arguments.csv_output if log4shell_finder_on_python_file_result.create_csv is defined and log4shell_finder_on_python_file_result.create_csv }} \
+          {{ log4shell_finder_on_python_dir_work if log4shell_finder_on_python_file_result.create_csv is defined and log4shell_finder_on_python_file_result.create_csv }}\
+          {{ log4shell_finder_on_python_file_result.filename_csv |d('log4shell_result') if log4shell_finder_on_python_file_result.create_csv is defined and log4shell_finder_on_python_file_result.create_csv }}\
+          {{ log4shell_finder_on_python_extension.csv if log4shell_finder_on_python_file_result.create_csv is defined and log4shell_finder_on_python_file_result.create_csv }} \
+          {{ log4shell_finder_on_python_arguments.json_output if log4shell_finder_on_python_file_result.create_json is defined and log4shell_finder_on_python_file_result.create_json }} \
+          {{ log4shell_finder_on_python_dir_work if log4shell_finder_on_python_file_result.create_json is defined and log4shell_finder_on_python_file_result.create_json }}\
+          {{ log4shell_finder_on_python_file_result.filename_json |d('log4shell_result') if log4shell_finder_on_python_file_result.create_json is defined and log4shell_finder_on_python_file_result.create_json }}\
+          {{ log4shell_finder_on_python_extension.json if log4shell_finder_on_python_file_result.create_json is defined and log4shell_finder_on_python_file_result.create_json }}"
+
+  failed_when: False
+  changed_when: False

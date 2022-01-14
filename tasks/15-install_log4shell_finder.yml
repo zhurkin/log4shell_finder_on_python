@@ -1,0 +1,22 @@
+---
+
+- name: Install log4shell-finder
+  block:
+
+    - name: Copy log4shell-finder {{ log4shell_finder_on_python.version  }} to {{ log4shell_finder_on_python_dir_work }} directory
+      copy:
+        src: log4shell-finder/test_log4shell-{{ log4shell_finder_on_python.version }}.py
+        dest: "{{ log4shell_finder_on_python_dir_work }}/test_log4shell-{{ log4shell_finder_on_python.version }}.py"
+        mode: 0640
+
+    - name: Get sha256sum of log4shell-finder
+      stat:
+        path: "{{ log4shell_finder_on_python_dir_work }}/test_log4shell-{{ log4shell_finder_on_python.version }}.py"
+        checksum_algorithm: sha256
+        get_checksum: yes
+      register: stat_result
+
+    - name: Verify sha256sum of log4shell-finder
+      fail:
+        msg: "sha256sum mismatch for file test_log4shell-{{ log4shell_finder_on_python.version }}.py"
+      when: stat_result.stat.checksum != log4shell_finder_on_python.checksum

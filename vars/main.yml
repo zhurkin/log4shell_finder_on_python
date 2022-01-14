@@ -1,0 +1,12 @@
+---
+
+log4shell_finder_on_python_arguments:
+  exclude_dirs: '--exclude-dirs'
+  json_output: '--json-out'
+  csv_output: '--csv-out'
+  json_extension: '.json'
+  csv_extension: '.csv'
+
+log4shell_finder_on_python_extension:
+  json: '.json'
+  csv: '.csv'

@@ -1,0 +1,19 @@
+---
+
+- name: Fetch log4shell-finder CSV reports from hosts
+  fetch:
+    src: "{{ log4shell_finder_on_python_dir_work }}/{{ log4shell_finder_on_python_result.filename_csv | d('log4shell_result') }}{{ log4shell_finder_on_python_extension.csv  }}"
+    dest: "{{ log4shell_finder_on_python_path_report_on_controlled_node | d('/tmp/log4shell_finder_report/')}}/{{ inventory_hostname }}_{{ ansible_default_ipv4.address }}_{{ log4shell_finder_on_python_result.filename_csv | d('log4shell_result') }}\
+          {{ log4shell_finder_on_python_extension.csv  }}"
+    flat: yes
+  when:
+    - log4shell_finder_on_python_file_result.create_csv
+
+- name: Fetch log4shell-finder JSON reports from hosts
+  fetch:
+    src: "{{ log4shell_finder_on_python_dir_work }}/{{ log4shell_finder_on_python_result.filename_json | d('log4shell_result') }}{{ log4shell_finder_on_python_extension.json  }}"
+    dest: "{{ log4shell_finder_on_python_path_report_on_controlled_node | d('/tmp/log4shell_finder_report/')}}/{{ inventory_hostname }}_{{ ansible_default_ipv4.address }}_{{ log4shell_finder_on_python_result.filename_json | d('log4shell_result') }}\
+          {{ log4shell_finder_on_python_extension.json  }}"
+    flat: yes
+  when:
+    - log4shell_finder_on_python_file_result.create_json

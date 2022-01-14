@@ -1,0 +1,21 @@
+---
+
+log4shell_finder_on_python:
+   version: '1.21'
+   checksum: 'd658567803a7dc85815a7d01935fb3e5d9951b82af27d2dd33b6be4a100614eb'
+   install_from_files_directory: yes
+   remove: yes
+   dir_work_remove: yes
+
+log4shell_finder_on_python_dir_work: /opt/log4shell-finder/
+
+log4shell_finder_on_python_dir_create:
+  - "{{ log4shell_finder_on_python_dir_work }}"
+
+log4shell_finder_on_python_path_search: /
+log4shell_finder_on_python_exclude_dirs: /home/
+#log4shell_finder_on_python_argument: -c {{ log4shell_finder_on_python_dir_work }}/log4shell_result.csv
+
+log4shell_finder_on_python_file_result:
+   create_csv: yes
+   create_json: yes

@@ -1,0 +1,29 @@
+---
+
+- name: Create log4shell-finder directory
+  file:
+    path: '{{ item }}'
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+  loop: "{{ log4shell_finder_on_python_dir_create }}"
+
+- name: Install log4shell-finder
+  include_tasks: 15-install_log4shell_finder.yml
+  when:
+    - log4shell_finder_on_python.install_from_files_directory
+
+- name: Run log4j-detector
+  include_tasks: 16-run_log4shell_finder.yml
+  when:
+    - log4shell_finder_on_python.install_from_files_directory
+
+- name: Write results log4shell-finder
+  include_tasks: 17-results_log4shell.yml
+  when:
+    - log4shell_finder_on_python.install_from_files_directory
+
+- name: Remove log4j-detector
+  include_tasks: 90-remove_log4shell_finder.yml
+

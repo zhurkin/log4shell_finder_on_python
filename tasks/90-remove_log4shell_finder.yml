@@ -1,0 +1,17 @@
+---
+
+- name: "Remove file log4shell-finder-{{ log4shell_finder_on_python.version }}"
+  file:
+    state: absent
+    path: "{{ log4shell_finder_on_python_dir_work }}/test_log4shell-{{ log4shell_finder_on_python.version }}.py"
+  when:
+    - log4shell_finder_on_python.remove is defined
+    - log4shell_finder_on_python.remove
+
+- name: "Remove directory log4shell_finder_on_python_dir_work"
+  file:
+    state: absent
+    path: "{{ log4shell_finder_on_python_dir_work }}"
+  when:
+    - log4shell_finder_on_python.dir_work_remove is defined
+    - log4shell_finder_on_python.dir_work_remove
